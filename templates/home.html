@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-semibold mb-4">Google Sheets Public Microservice</h1>
+        <p class="text-lg mb-4">This microservice allows you to fetch data from public Google Sheets and use it in your applications.</p>
+        
+        <a href="/config" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-8 inline-block">Get Started</a>
+      
+        <h2 class="text-2xl font-semibold mb-2">How to use the API</h2>
+      
+        <h3 class="text-xl font-semibold mt-4">1. Configure the API</h3>
+        <p class="mb-2">To begin, set up your Google Sheets API key and the default Google Sheet URL by visiting the <a href="/config" class="text-blue-500 underline">configuration page</a>.</p>
+      
+        <h3 class="text-xl font-semibold mt-4">2. Fetch data from a specific row</h3>
+        <p class="mb-2">To fetch data from a specific row, make a GET request to the following endpoint:</p>
+        <pre class="bg-gray-200 p-2 rounded"><code>GET /row/{row_number}?sheet_id={sheet_id}</code></pre>
+        <p class="mb-4">Replace <code>{row_number}</code> with the row number you want to fetch data from, and <code>{sheet_id}</code> with the Google Sheet ID you want to use. If you don't provide a sheet_id, the API will use the default sheet_id specified in the configuration.</p>
+      
+        <h3 class="text-xl font-semibold mt-4">3. Fetch data from a range of rows</h3>
+        <p class="mb-2">To fetch data from a range of rows, make a GET request to the following endpoint:</p>
+        <pre class="bg-gray-200 p-2 rounded"><code>GET /rows/{start_row}/{end_row}?sheet_id={sheet_id}</code></pre>
+        <p>Replace <code>{start_row}</code> and <code>{end_row}</code> with the start and end row numbers of the range, respectively, and <code>{sheet_id}</code> with the Google Sheet ID you want to use. If you don't provide a sheet_id, the API will use the default sheet_id specified in the configuration.</p>
+    </div>
+      
+  </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebook files
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+.env/
+
+# Config files
+config.pickle
+
+# Logs and databases
+*.log
+*.sqlite
+
+# Operating system files
+.DS_Store
+Thumbs.db

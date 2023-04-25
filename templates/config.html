@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Google Sheets Microservice Configuration
+{% endblock %}
+
+{% block content %}
+<body class="bg-gray-100">
+  <div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-2xl font-semibold">Google Sheets Microservice Configuration</h1>
+      <a href="/" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">Back to Home</a>
+    </div>
+    <form action="/config" method="post" class="bg-white p-4 rounded shadow">
+      {% if api_key %}
+        <div class="mb-4">
+          <label class="block mb-2 text-sm" for="api_key">Google Sheets API Key:</label>
+          <div class="relative">
+            <span id="api_key_display" class="font-mono bg-gray-200 p-1 rounded" data-apikey="{{ api_key }}">{{ "*" * (api_key|length) }}</span>
+            <input type="text" id="api_key_input" name="api_key" value="{{ api_key }}" class="border p-2 rounded" style="display:none;">
+            <i class="absolute top-1/2 transform -translate-y-1/2 right-2 cursor-pointer text-sm" id="api_key_edit" onclick="toggleApiKeyInput()">Edit</i>
+          </div>
+        </div>
+      {% else %}
+        <div class="mb-4">
+          <label class="block mb-2 text-sm" for="api_key">Google Sheets API Key:</label>
+          <input type="text" id="api_key" name="api_key" class="border p-2 rounded w-full" required>
+        </div>
+      {% endif %}
+
+      <div class="mb-4">
+        <label class="block mb-2 text-sm" for="default_sheet_url">Default Google Sheet URL:</label>
+        <div class="relative">
+          <span id="sheet_url_display" class="font-mono bg-gray-200 p-1 rounded" data-sheeturl="{{ default_sheet_url }}">{{ default_sheet_url or "None" }}</span>
+          <input type="text" id="default_sheet_url" name="default_sheet_url" class="border p-2 rounded w-full" style="display:none;">
+          <i class="absolute top-1/2 transform -translate-y-1/2 right-2 cursor-pointer text-sm" id="sheet_url_edit" onclick="toggleSheetUrlInput()">Edit</i>
+        </div>
+      </div>      
+
+      <input type="submit" value="Save" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+    </form>
+  </div>
+
+  <script>
+    function toggleApiKeyInput() {
+      const apiKeyDisplay = document.getElementById('api_key_display');
+      const apiKeyInput = document.getElementById('api_key_input');
+      const apiKeyEdit = document.getElementById('api_key_edit');
+
+      if (apiKeyDisplay.style.display === 'none') {
+          apiKeyDisplay.style.display = '';
+          apiKeyInput.style.display = 'none';
+          apiKeyEdit.textContent = 'Edit';
+      } else {
+          apiKeyDisplay.style.display = 'none';
+          apiKeyInput.style.display = '';
+          apiKeyInput.value = apiKeyDisplay.getAttribute('data-apikey');
+          apiKeyEdit.textContent = 'Cancel';
+      }
+    }
+  
+    function toggleSheetUrlInput() {
+      const sheetUrlDisplay = document.getElementById('sheet_url_display');
+      const sheetUrlInput = document.getElementById('default_sheet_url');
+      const sheetUrlEdit = document.getElementById('sheet_url_edit');
+
+      if (sheetUrlDisplay.style.display === 'none') {
+        sheetUrlDisplay.style.display = '';
+        sheetUrlInput.style.display = 'none';
+        sheetUrlEdit.textContent = 'Edit';
+      } else {
+        sheetUrlDisplay.style.display = 'none';
+        sheetUrlInput.style.display = '';
+        sheetUrlInput.value = sheetUrlDisplay.getAttribute('data-sheeturl') || '';
+        sheetUrlEdit.textContent = 'Cancel';
+      }
+    }
+
+  </script>
+  
+</body>
+{% endblock %}
