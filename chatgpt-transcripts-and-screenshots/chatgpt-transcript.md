@@ -2072,7 +2072,7 @@ This will give you a basic, clean UI with Tailwind CSS. You can further customiz
 
 ---
 
-![Config UI with CSS](config-ui-with-css.)
+![Config UI with CSS](config-ui-with-css.png)
 
 ---  
 <br>**👨 me:**  
